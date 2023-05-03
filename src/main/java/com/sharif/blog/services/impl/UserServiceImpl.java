@@ -3,6 +3,7 @@ package com.sharif.blog.services.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sharif.blog.entities.User;
@@ -17,6 +18,9 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepo userRepo;
+
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -55,33 +59,37 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void deleteUser(int id) {
-		User user =  userRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User id", "cannot able to find", id));
+		User user = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User id", "cannot able to find", id));
 		userRepo.delete(user);
 	}
 	
 	public User dtoToUser(UserDto userDto) {
-		User user = new User();
-		user.setId(userDto.getId());
-		user.setAbout(userDto.getAbout());
-		user.setDateOfBirth(userDto.getDateOfBirth());
-		user.setEmail(userDto.getEmail());
-		user.setGender(userDto.getGender());
-		user.setName(userDto.getName());
-		user.setPassword(userDto.getPassword());
-		user.setPhone(userDto.getPhone());
-		return user;	
+//		User user = new User();
+//		user.setId(userDto.getId());
+//		user.setAbout(userDto.getAbout());
+//		user.setDateOfBirth(userDto.getDateOfBirth());
+//		user.setEmail(userDto.getEmail());
+//		user.setGender(userDto.getGender());
+//		user.setName(userDto.getName());
+//		user.setPassword(userDto.getPassword());
+//		user.setPhone(userDto.getPhone());
+//		return user;
+		User user = this.modelMapper.map(userDto,User.class);
+		return user;
 	}
 	
 	public UserDto userToDto(User user) {
-		UserDto userDto = new UserDto();
-		userDto.setId(user.getId());
-		userDto.setAbout(user.getAbout());
-		userDto.setDateOfBirth(user.getDateOfBirth());
-		userDto.setEmail(user.getEmail());
-		userDto.setGender(user.getGender());
-		userDto.setName(user.getName());
-		userDto.setPassword(user.getPassword());
-		userDto.setPhone(user.getPhone());
-		return userDto;	
+//		UserDto userDto = new UserDto();
+//		userDto.setId(user.getId());
+//		userDto.setAbout(user.getAbout());
+//		userDto.setDateOfBirth(user.getDateOfBirth());
+//		userDto.setEmail(user.getEmail());
+//		userDto.setGender(user.getGender());
+//		userDto.setName(user.getName());
+//		userDto.setPassword(user.getPassword());
+//		userDto.setPhone(user.getPhone());
+//		return userDto;
+		UserDto userDto = this.modelMapper.map(user,UserDto.class);
+		return userDto;
 	}
 }

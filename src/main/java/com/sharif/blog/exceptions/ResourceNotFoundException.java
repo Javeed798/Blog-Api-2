@@ -4,16 +4,16 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 public class ResourceNotFoundException extends RuntimeException{
 	
-	String resouceName;
+	String resourceName;
 	
 	String fieldName;
 	
-	long fieldValue;
+	int fieldValue;
 
 
-	public ResourceNotFoundException(String resouceName, String fieldName, long fieldValue) {
-		super(String.format("%s is not found with %s : %l doesnt find",resouceName,fieldName,fieldValue));
-		this.resouceName = resouceName;
+	public ResourceNotFoundException(String resourceName, String fieldName, Integer fieldValue) {
+		super(String.format("%s is not found with %s : %d", resourceName, fieldName, fieldValue));
+		this.resourceName = resourceName;
 		this.fieldName = fieldName;
 		this.fieldValue = fieldValue;
 	}
