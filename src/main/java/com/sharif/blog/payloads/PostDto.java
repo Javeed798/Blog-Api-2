@@ -1,7 +1,10 @@
 package com.sharif.blog.payloads;
 
+import com.sharif.blog.entities.Comment;
 import lombok.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class PostDto {
@@ -12,4 +15,5 @@ public class PostDto {
     private Date addedDate;
     private CategoryDto category;
     private UserDto user;
+    private Set<CommentDto> comments = new HashSet<>();
 }
